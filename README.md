@@ -1,120 +1,105 @@
-# Projeto Ubuntu Server - Infraestrutura e Segurança de Redes
+# Ubuntu Server — Infrastructure, Security & Monitoring
 
-## Descrição
+Academic project focused on designing a resilient Linux server environment with secure networking, remote administration and system monitoring.
 
-Este projeto foi desenvolvido para a disciplina de Introdução à Computação e apresenta uma solução de infraestrutura utilizando Ubuntu Server como servidor principal para gerenciamento de serviços, armazenamento de dados e acesso remoto seguro.
+## Overview
 
-O objetivo é demonstrar a implementação de um ambiente resiliente, conectado e protegido, seguindo os princípios de disponibilidade, integridade e confiabilidade.
+The project demonstrates how Ubuntu Server can be used as the central component of a small infrastructure while addressing availability, integrity, reliability and security.
 
-## Objetivos
+## Objectives
 
-- Implementar um servidor utilizando Ubuntu Server.
-- Disponibilizar serviços de rede de forma segura.
-- Aplicar mecanismos de proteção contra falhas de hardware, software e segurança.
-- Demonstrar boas práticas de administração de sistemas Linux.
+- Deploy an Ubuntu Server environment.
+- Design a basic network architecture for the server.
+- Configure secure remote administration with SSH.
+- Apply firewall and brute-force protection.
+- Identify infrastructure risks and define mitigation measures.
+- Explore server monitoring and observability concepts.
 
-## Arquitetura da Rede
-
-Fluxo de dados:
-
-Internet → Roteador → Firewall (UFW) → Switch → Ubuntu Server
-
-Tecnologias utilizadas:
+## Environment
 
 - Ubuntu Server 24.04 LTS
-- Ethernet Gigabit
-- Wi-Fi
-- HTTPS
+- Ethernet / Wi-Fi networking
 - SSH
-- UFW Firewall
+- UFW
 - Fail2Ban
+- Docker-based monitoring concepts
+- Prometheus
+- Grafana
+- Grafana Loki
+- Node Exporter
+- cAdvisor
 
-## Matriz de Risco
+## Network Architecture
 
-### Falha de Hardware
-- Falta de energia elétrica
-- Impacto: Alto
+```text
+Internet
+   │
+Router
+   │
+Firewall (UFW)
+   │
+Switch
+   │
+Ubuntu Server
+   │
+   ├── SSH
+   ├── Services
+   └── Monitoring Agents
+           │
+           ├── Node Exporter ──> Prometheus
+           ├── cAdvisor ───────> Prometheus
+           └── Log Collector ──> Loki
+                                  │
+                              Grafana
+```
 
-### Falha de Software
-- Configuração incorreta de permissões
-- Impacto: Alto
+## Security
 
-### Falha de Rede/Segurança
-- Ataque de força bruta via SSH
-- Impacto: Alto
+### SSH
 
-## Medidas de Mitigação
+Remote administration is protected using SSH, with public-key authentication recommended instead of password-only access.
 
-### Hardware
-- Utilização de nobreak (UPS)
-- Backups periódicos
+### UFW
 
-### Software
-- Atualizações regulares
-- Controle de permissões
+UFW provides host-level firewall rules controlling which services and ports are exposed.
 
-### Rede e Segurança
-- Firewall UFW
-- Fail2Ban
-- Autenticação SSH por chave pública
-- Segmentação por VLAN
+### Fail2Ban
 
-## Comandos Utilizados
+Fail2Ban can monitor authentication logs and temporarily block IP addresses that repeatedly fail authentication.
+
+## Risk Matrix
+
+| Risk | Example | Impact | Mitigation |
+|---|---|---|---|
+| Hardware failure | Power loss | High | UPS and backups |
+| Software failure | Incorrect permissions/configuration | High | Updates, least privilege and backups |
+| Security incident | SSH brute-force attempt | High | UFW, Fail2Ban and SSH keys |
+| Network failure | Connectivity loss | Medium/High | Redundancy and network monitoring |
+
+## Basic Commands
+
 ```bash
 sudo apt update
 sudo apt upgrade -y
-### Atualização do sistema
 
+sudo ufw status verbose
+sudo ufw allow OpenSSH
+sudo ufw enable
+
+sudo systemctl status ssh
+sudo systemctl status fail2ban
 ```
 
-```mermaid
-graph LR
-    %% Definição de Estilos
-    classDef server fill:#f9f9f9,stroke:#333,stroke-width:2px;
-    classDef stack fill:#e1f5fe,stroke:#0288d1,stroke-width:2px;
-    classDef user fill:#fff3e0,stroke:#f57c00,stroke-width:2px;
+## Monitoring Concept
 
-    %% Nó Ubuntu Server (Alvo)
-    subgraph UBUNTU_SERVER ["Ubuntu Server (Host Monitorado)"]
-        direction TB
-        OS["Ubuntu OS / Kernel"]
-        
-        subgraph AGENTS ["Agentes de Coleta"]
-            NE["Node Exporter <br> (Métricas de Hardware/SO)"]
-            PT["Promtail / Logstash <br> (Coleta de Logs)"]
-            CA["cAdvisor <br> (Métricas de Containers)"]
-        end
-        
-        OS --> NE
-        OS --> PT
-    end
-    class UBUNTU_SERVER server;
+The monitoring architecture separates metric collection, log collection and visualization. Prometheus stores time-series metrics, Loki stores logs, and Grafana provides dashboards and visualization.
 
-    %% Nó Stack de Monitoramento
-    subgraph MONITORING_STACK ["Servidor de Monitoramento (Docker Stack)"]
-        direction TB
-        PROM[("Prometheus <br> (Banco de Métricas)")]
-        LOKI[("Grafana Loki <br> (Banco de Logs)")]
-        GRAFANA{"Grafana <br> (Visualização)"}
-        
-        PROM --> GRAFANA
-        LOKI --> GRAFANA
-    end
-    class MONITORING_STACK stack;
+## What I Learned
 
-    %% Nó de Acesso
-    subgraph CLIENT ["Acesso do Administrador"]
-        ADMIN["DevOps / SysAdmin <br> (Navegador Web)"]
-        ALERT["Alertmanager <br> (Discord/Slack/E-mail)"]
-    end
-    class CLIENT user;
+This project provided practical experience with Linux server administration, network architecture, security controls, risk analysis and the fundamentals of observability.
 
-    %% Conexões de Rede e Fluxo de Dados
-    NE -- "Porta 9100 (HTTP Pull)" --> PROM
-    CA -- "Porta 8080 (HTTP Pull)" --> PROM
-    PT -- "Porta 3100 (HTTP Push)" --> LOKI
-    
-    GRAFANA -- "Porta 3000 (HTTPS)" --> ADMIN
-    PROM --> ALERT
+## Author
 
-```
+Lucas Vinhal Ferreira — Computer Engineering student at UniCEUB.
+
+[GitHub](https://github.com/romunac) · [LinkedIn](https://www.linkedin.com/in/lucas-vinhal-24334a2b3)
