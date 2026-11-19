@@ -1,102 +1,35 @@
-# Ubuntu Server — Infrastructure, Security & Monitoring
+# Servitor
 
-Academic project focused on designing a resilient Linux server environment with secure networking, remote administration and system monitoring.
+**Lightweight infrastructure observability and thermal protection for small and medium-sized businesses.**
 
-## Overview
+Servitor is a product concept for teams that operate on-premise or hybrid servers without a dedicated 24/7 infrastructure team. A lightweight local agent is intended to collect temperature, CPU, and memory telemetry, buffer data during network interruptions, and send timely risk signals to a secure SaaS control plane.
 
-The project demonstrates how Ubuntu Server can be used as the central component of a small infrastructure while addressing availability, integrity, reliability and security.
+The goal is practical: help a small IT team spot overheating and server health issues early, coordinate a response, and reduce avoidable downtime.
 
-## Objectives
+> Servitor's footprint and alert-latency figures are engineering targets to validate on supported hardware. The current repository documents the product and an Ubuntu-based lab foundation; it does not yet implement the complete SaaS platform.
 
-- Deploy an Ubuntu Server environment.
-- Design a basic network architecture for the server.
-- Configure secure remote administration with SSH.
-- Apply firewall and brute-force protection.
-- Identify infrastructure risks and define mitigation measures.
-- Explore server monitoring and observability concepts.
+## Product promise
 
-## Environment
+- **Low-overhead collection:** target less than 1% average CPU and 50 MB resident memory for the agent, measured and published by supported host class.
+- **Fast thermal warning:** target alert dispatch in under five seconds after a qualifying sample when the host, network, and notification path are healthy.
+- **Clear operations:** one fleet view for thermal state, CPU, memory, heartbeat, and incident response.
+- **Designed for SMEs:** outbound-only host connectivity, straightforward Linux deployment, and actionable alerts rather than a complex observability stack.
 
-- Ubuntu Server 24.04 LTS
-- Ethernet / Wi-Fi networking
-- SSH
-- UFW
-- Fail2Ban
-- Docker-based monitoring concepts
-- Prometheus
-- Grafana
-- Grafana Loki
-- Node Exporter
-- cAdvisor
+## Product and architecture
 
-## Network Architecture
+The [Servitor product and architecture blueprint](docs/SERVITOR_PRODUCT_ARCHITECTURE_BLUEPRINT.md) documents the pitch, capabilities, event-driven design, recommended stack, security model, reliability approach, and v2 roadmap.
 
-```text
-Internet
-   │
-Router
-   │
-Firewall (UFW)
-   │
-Switch
-   │
-Ubuntu Server
-   │
-   ├── SSH
-   ├── Services
-   └── Monitoring Agents
-           │
-           ├── Node Exporter ──> Prometheus
-           ├── cAdvisor ───────> Prometheus
-           └── Log Collector ──> Loki
-                                  │
-                              Grafana
-```
+The proposed architecture uses a lightweight Linux agent, a TypeScript/Node.js ingestion service behind NGINX, PostgreSQL for durable records, Redis for ephemeral live state and suppression, and a React dashboard with WebSocket updates. Predictive thermal anomaly detection, safe automation, and environment discovery are roadmap items, not current features.
 
-## Security
+## Ubuntu lab foundation
 
-### SSH
+Ubuntu Server remains the initial host environment for the agent and lab. It is the deployment platform, while **Servitor** is the product.
 
-Remote administration is protected using SSH, with public-key authentication recommended instead of password-only access.
+The [Servitor Linux host preparation guide](Servitor_Linux_Host_Guide.md) contains the basic Ubuntu update, SSH, UFW, and Fail2Ban commands used to prepare a lab host. The earlier academic server design PDF is retained at [Projeto Ubuntu Server.pdf](Projeto%20Ubuntu%20Server.pdf) as historical source material; use the blueprint above as the current product direction.
 
-### UFW
+## Current status
 
-UFW provides host-level firewall rules controlling which services and ports are exposed.
-
-### Fail2Ban
-
-Fail2Ban can monitor authentication logs and temporarily block IP addresses that repeatedly fail authentication.
-
-## Risk Matrix
-
-| Risk | Example | Impact | Mitigation |
-|---|---|---|---|
-| Hardware failure | Power loss | High | UPS and backups |
-| Software failure | Incorrect permissions/configuration | High | Updates, least privilege and backups |
-| Security incident | SSH brute-force attempt | High | UFW, Fail2Ban and SSH keys |
-| Network failure | Connectivity loss | Medium/High | Redundancy and network monitoring |
-
-## Basic Commands
-
-```bash
-sudo apt update
-sudo apt upgrade -y
-
-sudo ufw status verbose
-sudo ufw allow OpenSSH
-sudo ufw enable
-
-sudo systemctl status ssh
-sudo systemctl status fail2ban
-```
-
-## Monitoring Concept
-
-The monitoring architecture separates metric collection, log collection and visualization. Prometheus stores time-series metrics, Loki stores logs, and Grafana provides dashboards and visualization.
-
-## What I Learned
-
-This project provided practical experience with Linux server administration, network architecture, security controls, risk analysis and the fundamentals of observability.
+The repository currently contains the original Ubuntu Server lab material and product documentation. Product capabilities such as fleet telemetry ingestion, threshold evaluation, deduplicated Web Push/email alerts, incident workflows, RBAC, and PDF reporting are planned implementation slices. Do not interpret the roadmap as shipped functionality.
 
 ## Author
 
