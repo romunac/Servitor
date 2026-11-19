@@ -74,6 +74,10 @@ Use the same token as `AGENT_TOKEN`. Replace `<host-uuid>` with a UUID. HTTP on 
 - [Local PostgreSQL and Redis services](deploy/compose.yaml)
 - The original [Ubuntu Server project PDF](Projeto%20Ubuntu%20Server.pdf) is retained as historical source material; the Servitor blueprint is the current product direction.
 
+## Validation status
+
+The package and TypeScript configuration files were checked, but the starter was not built or run in the authoring environment: Go and Docker were unavailable and npm dependencies were not installed. Run the quick start in a prepared Linux development environment before treating the code as operational.
+
 ## Security boundary
 
 The current API uses one shared `AGENT_TOKEN` and assigns accepted hosts to a fixed local-development tenant. That is a development shortcut, not a production identity or tenancy model. Before customer use, implement per-agent credentials and revocation, validate host-to-tenant binding, add user authentication and authorization, enforce tenant isolation, configure TLS, and establish retention and backup controls. Never commit real credentials or expose the development API directly to the internet.
