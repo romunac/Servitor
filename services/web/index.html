@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#09110f" />
     <meta name="description" content="Servitor helps small IT teams spot thermal and resource risk across their on-premise and hybrid servers." />
+    <meta property="og:title" content="Servitor — Know before heat becomes downtime" />
+    <meta property="og:description" content="A clearer view of the servers your business depends on. Explore Servitor’s Linux-first telemetry foundation." />
+    <meta property="og:type" content="website" />
     <title>Servitor — Know before heat becomes downtime</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -21,7 +24,7 @@
       <nav id="primary-nav" class="nav-links" aria-label="Primary navigation">
         <a href="#platform">Platform</a>
         <a href="#how-it-works">How it works</a>
-        <a href="#roadmap">Roadmap</a>
+        <a href="#get-started">Quick start</a>
         <a class="nav-cta" href="https://github.com/romunac/Servitor" target="_blank" rel="noreferrer">Explore on GitHub <span aria-hidden="true">↗</span></a>
       </nav>
     </header>
@@ -33,16 +36,16 @@
           <h1>Know before<br />heat becomes <span>downtime.</span></h1>
           <p class="hero-lede">A clearer view of the servers your business depends on. Servitor brings temperature, resource health, and host status into one focused monitoring experience.</p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#platform">See how it works <span aria-hidden="true">↘</span></a>
+            <a class="button button-primary" href="#get-started">Try the foundation <span aria-hidden="true">↘</span></a>
             <a class="button button-quiet" href="https://github.com/romunac/Servitor" target="_blank" rel="noreferrer">View the project <span aria-hidden="true">↗</span></a>
           </div>
           <div class="hero-note"><span class="note-line"></span> Built for lean IT teams and mixed server rooms.</div>
         </div>
-        <div class="hero-visual" aria-label="Illustration of a server health monitoring dashboard">
+        <div class="hero-visual" role="img" aria-label="Illustrative concept of a future server health dashboard; the readings shown are sample values">
           <div class="visual-orbit orbit-one"></div><div class="visual-orbit orbit-two"></div>
           <div class="dashboard-card">
-            <div class="dashboard-top"><div class="dash-title"><span class="dash-logo">S</span><span>Fleet overview</span></div><span class="period-label">LAST 24 HOURS <span>⌄</span></span></div>
-            <div class="fleet-summary"><div><span class="summary-label">HOSTS MONITORED</span><div class="summary-value">08 <span class="summary-muted">/ 10</span></div></div><div class="health-pill"><span class="live-dot"></span> Fleet healthy</div></div>
+            <div class="dashboard-top"><div class="dash-title"><span class="dash-logo">S</span><span>Fleet overview</span></div><span class="period-label">SAMPLE VIEW</span></div>
+            <div class="fleet-summary"><div><span class="summary-label">EXAMPLE HOSTS</span><div class="summary-value">08 <span class="summary-muted">/ 10</span></div></div><div class="health-pill"><span class="live-dot"></span> Concept</div></div>
             <div class="chart-panel">
               <div class="chart-head"><div><span class="chart-label">CPU TEMPERATURE</span><div class="chart-reading">62<span>°C</span><span class="reading-change">+2.4°</span></div></div><span class="chart-legend"><i></i> srv-db-01</span></div>
               <div class="chart-area"><div class="chart-grid"><i></i><i></i><i></i><i></i></div><svg viewBox="0 0 480 126" preserveAspectRatio="none" role="img" aria-label="Temperature trend line"><defs><linearGradient id="area" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#b2f078" stop-opacity=".2"/><stop offset="1" stop-color="#b2f078" stop-opacity="0"/></linearGradient></defs><path class="chart-fill" d="M0 92 C24 88 30 93 50 82 S83 76 97 83 S124 72 145 75 S171 59 195 67 S222 60 240 63 S264 46 285 57 S314 54 333 43 S362 56 381 46 S404 35 423 40 S456 26 480 21 V126 H0Z"/><path class="chart-line" d="M0 92 C24 88 30 93 50 82 S83 76 97 83 S124 72 145 75 S171 59 195 67 S222 60 240 63 S264 46 285 57 S314 54 333 43 S362 56 381 46 S404 35 423 40 S456 26 480 21"/></svg></div>
@@ -51,7 +54,7 @@
             <div class="host-row"><span class="host-indicator healthy"></span><span class="host-name">srv-app-02</span><span class="host-meta">CPU <b>28%</b></span><span class="host-meta">RAM <b>64%</b></span><span class="host-temp">48°</span></div>
             <div class="host-row"><span class="host-indicator warning"></span><span class="host-name">srv-db-01</span><span class="host-meta">CPU <b>42%</b></span><span class="host-meta">RAM <b>71%</b></span><span class="host-temp warm">62°</span></div>
             <div class="host-row"><span class="host-indicator healthy"></span><span class="host-name">srv-backup</span><span class="host-meta">CPU <b>16%</b></span><span class="host-meta">RAM <b>52%</b></span><span class="host-temp">43°</span></div>
-            <div class="dashboard-footer"><span class="sync-icon">⟳</span> Last heartbeat <b>just now</b><span class="footer-separator">·</span> Updated continuously</div>
+            <div class="dashboard-footer"><span class="sync-icon">ⓘ</span> Illustrative concept · sample readings</div>
           </div>
           <div class="float-chip chip-top"><span class="chip-icon">↗</span><span><b>Temperature</b><small>Spot a rising trend</small></span></div>
           <div class="float-chip chip-bottom"><span class="chip-signal"><i></i><i></i><i></i></span><span><b>Host health</b><small>One fleet view</small></span></div>
@@ -76,6 +79,32 @@
       <section class="workflow-section" id="how-it-works">
         <div class="wrap workflow-wrap"><div class="workflow-heading"><div><p class="eyebrow">A simple path from host to insight</p><h2>Signals in.<br /><span>Clarity out.</span></h2></div><p>The initial foundation is designed around outbound telemetry and a focused view of the fleet. A small footprint, straightforward deployment, and clear product boundaries come first.</p></div>
           <div class="workflow-rail"><div class="rail-line"></div><article class="workflow-step"><span class="step-number">01</span><div class="step-icon"><svg viewBox="0 0 32 32" fill="none"><rect x="7" y="4" width="18" height="24" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M11 10h10M11 15h10M11 20h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="22" cy="23" r="1" fill="currentColor"/></svg></div><h3>Collect</h3><p>A local Linux agent samples temperature, CPU, memory, and heartbeat.</p></article><article class="workflow-step"><span class="step-number">02</span><div class="step-icon"><svg viewBox="0 0 32 32" fill="none"><path d="M5 16h5l3-7 6 14 3-7h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="16" cy="16" r="13" stroke="currentColor" stroke-width="1.3"/></svg></div><h3>Buffer & send</h3><p>Bounded local storage helps hold batches through network interruptions.</p></article><article class="workflow-step"><span class="step-number">03</span><div class="step-icon"><svg viewBox="0 0 32 32" fill="none"><rect x="4" y="5" width="24" height="22" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M4 11h24M11 27V11m10 16V11" stroke="currentColor" stroke-width="1.3"/><path d="m7 8 1 0m3 0h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><h3>Understand</h3><p>Bring machine health and history into a fleet view your team can act on.</p></article></div>
+        </div>
+      </section>
+
+      <section class="starter-section" id="get-started">
+        <div class="wrap starter-layout">
+          <div class="starter-intro">
+            <p class="eyebrow">A practical first step</p>
+            <h2>Run the foundation<br /><span>on a Linux host.</span></h2>
+            <p>The public repository contains a development API and a Linux telemetry agent you can run locally. This quick start is for development only; the current prototype is not a production monitoring or hardware protection service.</p>
+            <a class="button button-primary" href="https://github.com/romunac/Servitor#quick-start-development" target="_blank" rel="noreferrer">Open the full quick start <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="starter-steps">
+            <article class="starter-step">
+              <div class="starter-step-heading"><span class="starter-number">01</span><div><h3>Set a development token</h3><p>Copy the API template and set a private local <code>AGENT_TOKEN</code>.</p></div></div>
+              <div class="code-window"><div class="code-window-top"><span>REPOSITORY ROOT</span><button type="button" class="copy-command" aria-label="Copy environment template command">Copy</button></div><pre><code>cp services/api/.env.example services/api/.env</code></pre></div>
+            </article>
+            <article class="starter-step">
+              <div class="starter-step-heading"><span class="starter-number">02</span><div><h3>Start the API stack</h3><p>Run PostgreSQL, Redis, and the development API from the repository root.</p></div></div>
+              <div class="code-window"><div class="code-window-top"><span>REPOSITORY ROOT</span><button type="button" class="copy-command" aria-label="Copy Docker Compose command">Copy</button></div><pre><code>docker compose -f deploy/compose.yaml up -d --build</code></pre></div>
+            </article>
+            <article class="starter-step">
+              <div class="starter-step-heading"><span class="starter-number">03</span><div><h3>Build the Linux agent</h3><p>Run it on your Linux host and point it at the local API.</p></div></div>
+              <div class="code-window"><div class="code-window-top"><span>LINUX HOST</span><button type="button" class="copy-command" aria-label="Copy Linux agent command">Copy</button></div><pre><code>cd agent &amp;&amp; go build -o servitor-agent ./cmd/servitor-agent &amp;&amp; ./servitor-agent --api http://localhost:8080 --token &lt;development-token&gt; --host-id &lt;host-uuid&gt;</code></pre></div>
+            </article>
+            <p class="starter-caution"><span aria-hidden="true">!</span> Local development only. Put the API behind TLS before any non-local use, and keep the shared development token private.</p>
+          </div>
         </div>
       </section>
 
