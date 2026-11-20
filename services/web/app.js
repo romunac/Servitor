@@ -16,4 +16,22 @@ primaryNav.addEventListener('click', (event) => {
   }
 });
 
+document.querySelectorAll('.copy-command').forEach((button) => {
+  button.addEventListener('click', async () => {
+    const code = button.closest('.code-window')?.querySelector('code')?.textContent;
+    if (!code || !navigator.clipboard?.writeText) {
+      button.textContent = 'Unavailable';
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(code);
+      button.textContent = 'Copied';
+      window.setTimeout(() => { button.textContent = 'Copy'; }, 1600);
+    } catch {
+      button.textContent = 'Copy failed';
+    }
+  });
+});
+
 document.querySelector('#year').textContent = new Date().getFullYear();
