@@ -67,6 +67,8 @@ Use the same token as `AGENT_TOKEN`. Replace `<host-uuid>` with a UUID. HTTP on 
 
 ## Repository map
 
+- [Servitor product website](services/web/README.md) — static, dependency-free landing page for the product vision and MVP status.
+
 - [Product and architecture blueprint](docs/SERVITOR_PRODUCT_ARCHITECTURE_BLUEPRINT.md)
 - [Linux host preparation guide](Servitor_Linux_Host_Guide.md)
 - [Agent entry point](agent/cmd/servitor-agent/main.go) and [Linux collectors](agent/internal/collect/collect_linux.go)
